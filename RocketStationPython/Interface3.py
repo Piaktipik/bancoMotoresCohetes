@@ -16,12 +16,12 @@ class RocketInterface(QMainWindow, testdesigner.Ui_MainWindow):
         super(RocketInterface, self).__init__(parent)
         self.setupUi(self)
 
-        self.Sampling_Time = '300'
+        self.Sampling_Time = '500'
         self.CountDown_Value = 10
         self.Save_Format = "txt"
         self.CountDownTimer = QTimer()
         self.Led.setStyleSheet('QLabel {background-color: #ef0e0e; color: red;}')
-#        self.Feedback.setStyleSheet('QLabel {background-color: #ffffff; color: white;}')
+        #self.Feedback.setStyleSheet('QLabel {background-color: #ffffff; color: white;}')
         self.Feedback.setText('Bienvenido al banco de pruebas')
 
         #self.clicked.connect(self.Fire, SIGNAL("clicked()"), self.colorC)
