@@ -18,8 +18,8 @@ class MplCanvas(FigureCanvas):
 
         self.compute_initial_figure()
 
-#        Data=TDP()
-#        self.Data=Data
+        #Data=TDP()
+        #self.Data=Data
 
         # Check
         FigureCanvas.__init__(self, fig)
@@ -30,6 +30,163 @@ class MplCanvas(FigureCanvas):
                                    QtWidgets.QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
 
+###################################### Graficas ###################################### 
+
+class MplTemp(MplCanvas):
+
+    def __init__(self,Data,*args, **kwargs):
+        MplCanvas.__init__(self, *args, **kwargs)
+        #self.PlotSignal = PlotSignalFlag
+        self.PlotSignal = 0
+        self.checkSignal = 1
+        self.Data=Data
+        timer = QtCore.QTimer(self)
+        timer.timeout.connect(self.update_figure)
+        timer.start(0)
+
+    def compute_initial_figure(self):
+        self.axes.plot([0],[0])
+        self.axes.set_title('Temperatura')
+
+    def update_figure(self):
+        # Build a list of 4 random integers between 0 and 10 (both inclusive)
+        #print(self.PlotSignal)
+        if (self.checkSignal==0):
+            self.axes.cla()
+        else:
+
+            if (self.PlotSignal==1):
+                #l = [random.randint(0, 10) for i in range(50)]
+                #self.axes.cla()
+                #self.axes.plot(np.arange(50.0), l, 'r')
+                #self.axes.set_title('Temperatura')
+                #self.draw()
+                self.Data.Medir()
+                self.axes.cla()
+                if (len(self.Data.Time)>50):
+                    self.axes.plot(self.Data.Time[-50:], self.Data.Temp[-50:], 'r')
+                else:
+                    self.axes.plot(self.Data.Time[1:], self.Data.Temp[1:], 'r')
+                self.axes.set_title('Temperatura')
+                self.draw()
+
+class MplPress(MplCanvas):
+
+    def __init__(self,Data, *args, **kwargs):
+        MplCanvas.__init__(self, *args, **kwargs)
+        self.PlotSignal = 0
+        self.checkSignal = 1
+        self.Data=Data
+        timer = QtCore.QTimer(self)
+        timer.timeout.connect(self.update_figure)
+        timer.start(0)
+
+    def compute_initial_figure(self):
+        self.axes.plot([0],[0])
+        self.axes.set_title('Presión')
+
+    def update_figure(self):
+        # Build a list of 4 random integers between 0 and 10 (both inclusive)
+        if (self.checkSignal==0):
+            self.axes.cla()
+        else:
+
+            if (self.PlotSignal==1):
+                self.Data.Medir()
+                self.axes.cla()
+                if (len(self.Data.Time)>50):
+                    self.axes.plot(self.Data.Time[-50:], self.Data.Press[-50:], 'b')
+                else:
+                    self.axes.plot(self.Data.Time[1:], self.Data.Press[1:], 'b')
+                self.axes.set_title('Presión')
+                self.draw()
+
+class MplThr(MplCanvas):
+
+    def __init__(self,Data, *args, **kwargs):
+        MplCanvas.__init__(self, *args, **kwargs)
+        self.PlotSignal = 0
+        self.checkSignal = 1
+        self.Data=Data
+        timer = QtCore.QTimer(self)
+        timer.timeout.connect(self.update_figure)
+        timer.start(0)
+
+    def compute_initial_figure(self):
+        self.axes.plot([0],[0])
+        self.axes.set_title('Empuje')
+
+    def update_figure(self):
+        # Build a list of 4 random integers between 0 and 10 (both inclusive)
+        if (self.checkSignal==0):
+            self.axes.cla()
+        else:
+
+            if (self.PlotSignal==1):
+                self.Data.Medir()
+                self.axes.cla()
+                if (len(self.Data.Time)>50):
+                    self.axes.plot(self.Data.Time[-50:], self.Data.Thr[-50:], 'g')
+                else:
+                    self.axes.plot(self.Data.Time[1:], self.Data.Thr[1:], 'g')
+                self.axes.set_title('Empuje')
+                self.draw()
+
+######################################  ###################################### 
+
+class MplWidget(QtWidgets.QWidget):
+    """Widget defined in Qt Designer"""
+    def __init__(self, parent=None):
+        # initialization of Qt MainWindow widget
+        QtWidgets.QWidget.__init__(self, parent)
+        Data=TDP()
+        self.Data=Data
+
+        # set the canvas to the Matplotlib widget
+        self.canvasTemp = MplTemp(self.Data)
+        self.canvasPress = MplPress(self.Data)
+        self.canvasThr = MplThr(self.Data)
+        #self.Signals = MplSignals()
+        #self.canvas_2 = MplCanvas(figure=2)
+        # create a vertical box layout
+        #QSplitter(Qt.Horizontal, self)
+        self.hbl = QtWidgets.QHBoxLayout()
+        # add mpl widget to vertical box
+        #self.hbl.addWidget(self.canvas_2, stretch=2)
+        self.hbl.addWidget(self.canvasTemp, stretch=1)
+        self.hbl.addWidget(self.canvasPress, stretch=1)
+        self.hbl.addWidget(self.canvasThr, stretch=1)
+        #self.hbl.addWidget(self.Signals.MplTemp, stretch=1)
+        #self.hbl.addWidget(self.Signals.MplPress, stretch=1)
+        #self.hbl.addWidget(self.Signals.MplThr, stretch=1)
+        # set the layout to th vertical box
+        self.setLayout(self.hbl)
+
+    def PlotData(self,sensor,PlotSignalFlag):
+
+        if (sensor==1):
+            self.canvasTemp.PlotSignal=PlotSignalFlag
+        elif (sensor==2):
+            self.canvasPress.PlotSignal=PlotSignalFlag
+        elif (sensor==3):
+            self.canvasThr.PlotSignal=PlotSignalFlag
+        else:
+            print('Error, Check PlotSignal')
+
+    def CheckData(self,sensor,PlotSignalFlag):
+
+        if (sensor==1):
+            self.canvasTemp.checkSignal=PlotSignalFlag
+        elif (sensor==2):
+            self.canvasPress.checkSignal=PlotSignalFlag
+        elif (sensor==3):
+            self.canvasThr.checkSignal=PlotSignalFlag
+        else:
+            print('Error, Check CheckSignal')
+
+###################################### Comentarios ###################################### 
+
+'''
 #class MplSignals(MplCanvas):
 #
 #    def __init__(self,*args, **kwargs):
@@ -61,155 +218,6 @@ class MplCanvas(FigureCanvas):
 #            self.axes.set_title('Temperatura')
 #            self.draw()
 
-class MplTemp(MplCanvas):
-
-    def __init__(self,Data,*args, **kwargs):
-        MplCanvas.__init__(self, *args, **kwargs)
-#        self.PlotSignal = PlotSignalFlag
-        self.PlotSignal = 0
-        self.checkSignal = 0
-        self.Data=Data
-        timer = QtCore.QTimer(self)
-        timer.timeout.connect(self.update_figure)
-        timer.start(0)
-
-    def compute_initial_figure(self):
-        self.axes.plot([0],[0])
-        self.axes.set_title('Temperatura')
-
-    def update_figure(self):
-        # Build a list of 4 random integers between 0 and 10 (both inclusive)
-        #print(self.PlotSignal)
-        if (self.checkSignal==0):
-            self.axes.cla()
-        else:
-
-            if (self.PlotSignal==1):
-#            l = [random.randint(0, 10) for i in range(50)]
-#            self.axes.cla()
-#            self.axes.plot(np.arange(50.0), l, 'r')
-#            self.axes.set_title('Temperatura')
-#            self.draw()
-                self.Data.Medir()
-                self.axes.cla()
-                if (len(self.Data.X_Temp)>50):
-                    self.axes.plot(self.Data.X_Temp[-50:], self.Data.Y_Temp[-50:], 'r')
-                else:
-                    self.axes.plot(self.Data.X_Temp[1:], self.Data.Y_Temp[1:], 'r')
-                self.axes.set_title('Temperatura')
-                self.draw()
-
-class MplPress(MplCanvas):
-
-    def __init__(self,Data, *args, **kwargs):
-        MplCanvas.__init__(self, *args, **kwargs)
-        self.PlotSignal = 0
-        self.checkSignal = 0
-        self.Data=Data
-        timer = QtCore.QTimer(self)
-        timer.timeout.connect(self.update_figure)
-        timer.start(0)
-
-    def compute_initial_figure(self):
-        self.axes.plot([0],[0])
-        self.axes.set_title('Presión')
-
-    def update_figure(self):
-        # Build a list of 4 random integers between 0 and 10 (both inclusive)
-        if (self.checkSignal==0):
-            self.axes.cla()
-        else:
-
-            if (self.PlotSignal==1):
-                self.Data.Medir()
-                self.axes.cla()
-                if (len(self.Data.X_Press)>50):
-                    self.axes.plot(self.Data.X_Press[-50:], self.Data.Y_Press[-50:], 'b')
-                else:
-                    self.axes.plot(self.Data.X_Press[1:], self.Data.Y_Press[1:], 'b')
-                self.axes.set_title('Presión')
-                self.draw()
-
-class MplThr(MplCanvas):
-
-    def __init__(self,Data, *args, **kwargs):
-        MplCanvas.__init__(self, *args, **kwargs)
-        self.PlotSignal = 0
-        self.checkSignal = 0
-        self.Data=Data
-        timer = QtCore.QTimer(self)
-        timer.timeout.connect(self.update_figure)
-        timer.start(0)
-
-    def compute_initial_figure(self):
-        self.axes.plot([0],[0])
-        self.axes.set_title('Empuje')
-
-    def update_figure(self):
-        # Build a list of 4 random integers between 0 and 10 (both inclusive)
-        if (self.checkSignal==0):
-            self.axes.cla()
-        else:
-
-            if (self.PlotSignal==1):
-                self.Data.Medir()
-                self.axes.cla()
-                if (len(self.Data.X_Thr)>50):
-                    self.axes.plot(self.Data.X_Thr[-50:], self.Data.Y_Thr[-50:], 'g')
-                else:
-                    self.axes.plot(self.Data.X_Thr[1:], self.Data.Y_Thr[1:], 'g')
-                self.axes.set_title('Empuje')
-                self.draw()
-
-class MplWidget(QtWidgets.QWidget):
-    """Widget defined in Qt Designer"""
-    def __init__(self, parent=None):
-        # initialization of Qt MainWindow widget
-        QtWidgets.QWidget.__init__(self, parent)
-        Data=TDP()
-        self.Data=Data
-
-        # set the canvas to the Matplotlib widget
-        self.canvasTemp = MplTemp(self.Data)
-        self.canvasPress = MplPress(self.Data)
-        self.canvasThr = MplThr(self.Data)
-#        self.Signals = MplSignals()
-        #self.canvas_2 = MplCanvas(figure=2)
-        # create a vertical box layout
-        #QSplitter(Qt.Horizontal, self)
-        self.hbl = QtWidgets.QHBoxLayout()
-        # add mpl widget to vertical box
-        #self.hbl.addWidget(self.canvas_2, stretch=2)
-        self.hbl.addWidget(self.canvasTemp, stretch=1)
-        self.hbl.addWidget(self.canvasPress, stretch=1)
-        self.hbl.addWidget(self.canvasThr, stretch=1)
-#        self.hbl.addWidget(self.Signals.MplTemp, stretch=1)
-#        self.hbl.addWidget(self.Signals.MplPress, stretch=1)
-#        self.hbl.addWidget(self.Signals.MplThr, stretch=1)
-        # set the layout to th vertical box
-        self.setLayout(self.hbl)
-
-    def PlotData(self,sensor,PlotSignalFlag):
-
-        if (sensor==1):
-            self.canvasTemp.PlotSignal=PlotSignalFlag
-        elif (sensor==2):
-            self.canvasPress.PlotSignal=PlotSignalFlag
-        elif (sensor==3):
-            self.canvasThr.PlotSignal=PlotSignalFlag
-        else:
-            print('Error, Check PlotSignal')
-
-    def CheckData(self,sensor,PlotSignalFlag):
-
-        if (sensor==1):
-            self.canvasTemp.checkSignal=PlotSignalFlag
-        elif (sensor==2):
-            self.canvasPress.checkSignal=PlotSignalFlag
-        elif (sensor==3):
-            self.canvasThr.checkSignal=PlotSignalFlag
-        else:
-            print('Error, Check CheckSignal')
 
 #    def CheckCommunication(self):
 #
@@ -304,3 +312,4 @@ class MplWidget(QtWidgets.QWidget):
 ##        self.hbl.addWidget(self.canvas_2, stretch=2)
 ##        self.hbl.addWidget(self.canvas_1, stretch=1)
 ##        self.setLayout(self.hbl)
+'''

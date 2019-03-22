@@ -1,61 +1,66 @@
 
+# Librerias
 import numpy as np
 import serial
 import time
 import re
 
+ # Clase Graficar Datos puerto serial
 class PlotData():
 
     def __init__(self, parent = None):
-        #super(PlotData, self).__init__(parent)
-        self.ser = serial.Serial('COM4', 38400, timeout=1)  # serial prueba
-    ##    self.ser = serial.Serial('/dev/tty.usbmodem1421', 115200, timeout=0)
-    #    self.ser = serial.Serial('/dev/cu.usbserial-DN018IQ4', 38400, timeout=0)
+        # Se inicia puerto de comunicaciones
+        self.ser = serial.Serial('/dev/ttyUSB1', 115200, timeout=1)  # serial prueba
 
-        self.X_Temp = np.array([0.])
-        self.X_Press = np.array([0.])
-        self.X_Thr = np.array([0.])
-        self.Y_Temp = np.array([0.])
-        self.Y_Press = np.array([0.])
-        self.Y_Thr = np.array([0.])
+        # Se inicializan los vectores de datos (Tiempo y Variables)
+        self.Time = np.array([0])
+        # Variables
+        self.Temp = np.array([0.])
+        self.Press = np.array([0.])
+        self.Thr = np.array([0.])
+        # Mensajes 
         self.Message = ''
 
+    # Funcion Captura dato serial
     def Medir(self):
-        #ser = serial.Serial('COM9', 9600, timeout=1)
         mida = 2
 
         while (mida>1):
             print("Lectura Dato...")
-            Dato=self.ser.readline()
+
+            Dato = self.ser.readline()
             print(Dato)
             print("Tam: " + str(len(Dato)))
+
             if (Dato.decode('utf-8')!=''):
                 print('No Vacio')
                 
-
-                if(len(Dato)>=23):
+                if(len(Dato)<20 and len(Dato)>2):
+                    # Señales
+                    p = self.ser.readline()
+                    print("Llego.....................:")
+                    print(p)
+                    # Cuenta regresiva iniciada -> valor conteo
                     Dato = Dato.decode('utf-8')
-                    Dato1 = re.split('P|T|E|F\r\n',Dato)
-                    Dato2 = Dato1[1:4]
+                    if(Dato[0] == 'A'):
+                        print("Cuenta regresiva inicidada")
+                    # Cuenta regresiva abortada
 
-                    self.Y_Press = np.append(self.Y_Press, float(Dato2[0]))
-                    self.X_Press = np.append(self.X_Press, self.X_Press[len(self.X_Press)-1]+1*0.2)
-                    self.Y_Temp = np.append(self.Y_Temp, float(Dato2[1]))
-                    self.X_Temp = np.append(self.X_Temp, self.X_Temp[len(self.X_Temp)-1]+1*0.2)
-                    self.Y_Thr = np.append(self.Y_Thr, float(Dato2[2]))
-                    self.X_Thr = np.append(self.X_Thr, self.X_Thr[len(self.X_Thr)-1]+1*0.2)
 
-                    if (len(self.X_Press)>len(self.Y_Press)):
-                        self.X_Press = np.delete(self.X_Press, len(self.X_Press)-1)
-                    if (len(self.X_Temp)>len(self.Y_Temp)):
-                        self.X_Temp = np.delete(self.X_Temp, len(self.X_Temp)-1)
-                    if (len(self.X_Thr)>len(self.Y_Thr)):
-                        self.X_Thr = np.delete(self.X_Thr, len(self.X_Thr)-1)
-                    print(len(self.X_Temp))
-                    print(len(self.Y_Press))
-                    print(len(self.Y_Temp))
-                    print(len(self.Y_Thr))
+                if(len(Dato)>=20):
+                    Dato = Dato.decode('utf-8')
+                    Dato1 = re.split(',',Dato)
+                    Dato2 = Dato1[1:5]
+                    
+                    self.Time = np.append(self.Time, int(Dato2[0]))
+
+                    self.Press = np.append(self.Press, (float(Dato2[1])/1000))
+                    self.Temp = np.append(self.Temp, (float(Dato2[2])/100))
+                    self.Thr = np.append(self.Thr, (float(Dato2[3])/1000))
+
+                    print(len(self.Time))
                     mida=mida-1
+
 
     def CheckCommunication(self):
         #ser = serial.Serial('COM9', 9600, timeout=0)
@@ -114,11 +119,11 @@ class PlotData():
 #            except:
 #                pass
 
-    def StartCommunication(self, sampletime):
-        # ser = serial.Serial('COM9', 9600, timeout=0)
-        # time.sleep(1)
-        var=sampletime.encode('utf-8');
-        self.ser.write(var)
-        p = self.ser.readline();
-        print(p)
+    def StartCount(self):
+        # Enviamos comando inicion conteo 10 segundos
+        print("Enviando comando inicio cuenta regresiva")
+        self.ser.write(b'S')  
+        #p = self.ser.readline();
+        #print(p)
         # ser.close()
+

@@ -16,6 +16,7 @@ except AttributeError:
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1200, 600)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -23,31 +24,41 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
+
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setEnabled(True)
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
+
         self.groupBox.setSizePolicy(sizePolicy)
         self.groupBox.setMinimumSize(QtCore.QSize(215, 500))
         self.groupBox.setMaximumSize(QtCore.QSize(16777215, 500))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
+
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.groupBox)
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        
+        '''self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+
         self.label_SampleTime = QtWidgets.QLabel(self.groupBox)
         self.label_SampleTime.setMaximumSize(QtCore.QSize(16777215, 20))
         self.label_SampleTime.setObjectName(_fromUtf8("label_SampleTime"))
+
         self.verticalLayout_2.addWidget(self.label_SampleTime)
         self.SampleTime = QtWidgets.QComboBox(self.groupBox)
         self.SampleTime.setLayoutDirection(QtCore.Qt.RightToLeft)
@@ -56,9 +67,12 @@ class Ui_MainWindow(object):
         self.SampleTime.addItem(_fromUtf8(""))
         self.SampleTime.addItem(_fromUtf8(""))
         self.verticalLayout_2.addWidget(self.SampleTime)
+        
         self.verticalLayout_5.addLayout(self.verticalLayout_2)
         spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem)
+        '''
+
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.label_Sensor = QtWidgets.QLabel(self.groupBox)
@@ -66,23 +80,29 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_Sensor)
         self.check_Temp = QtWidgets.QCheckBox(self.groupBox)
         self.check_Temp.setObjectName(_fromUtf8("check_Temp"))
+        self.check_Temp.setChecked(True)
         self.verticalLayout.addWidget(self.check_Temp)
         self.check_Press = QtWidgets.QCheckBox(self.groupBox)
         self.check_Press.setObjectName(_fromUtf8("check_Press"))
+        self.check_Press.setChecked(True)
         self.verticalLayout.addWidget(self.check_Press)
         self.check_Thr = QtWidgets.QCheckBox(self.groupBox)
         self.check_Thr.setObjectName(_fromUtf8("check_Thr"))
+        self.check_Thr.setChecked(True)
         self.verticalLayout.addWidget(self.check_Thr)
+        
         self.verticalLayout_5.addLayout(self.verticalLayout)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem1)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.label_SaveDataFormat = QtWidgets.QLabel(self.groupBox)
+        
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_SaveDataFormat.sizePolicy().hasHeightForWidth())
+        
         self.label_SaveDataFormat.setSizePolicy(sizePolicy)
         self.label_SaveDataFormat.setObjectName(_fromUtf8("label_SaveDataFormat"))
         self.verticalLayout_3.addWidget(self.label_SaveDataFormat)
@@ -93,13 +113,17 @@ class Ui_MainWindow(object):
         self.OutFormat.addItem(_fromUtf8(""))
         self.verticalLayout_3.addWidget(self.OutFormat)
         self.verticalLayout_5.addLayout(self.verticalLayout_3)
+        
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem2)
+
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
+
         self.label_CountDown = QtWidgets.QLabel(self.groupBox)
         self.label_CountDown.setObjectName(_fromUtf8("label_CountDown"))
         self.verticalLayout_4.addWidget(self.label_CountDown)
+
         self.CountDown_Box = QtWidgets.QComboBox(self.groupBox)
         self.CountDown_Box.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.CountDown_Box.setObjectName(_fromUtf8("CountDown_Box"))
@@ -201,30 +225,40 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+
         MainWindow.setWindowTitle(_translate("MainWindow", _fromUtf8("Estación de Medición"), None))
         self.groupBox.setTitle(_translate("MainWindow", "Parámetros de entrada", None))
-        self.label_SampleTime.setText(_translate("MainWindow", "Tiempo de muestreo (ms):", None))
+
+        '''self.label_SampleTime.setText(_translate("MainWindow", "Tiempo de muestreo (ms):", None))
         self.SampleTime.setItemText(0, _translate("MainWindow", "300", None))
         self.SampleTime.setItemText(1, _translate("MainWindow", "400", None))
-        self.SampleTime.setItemText(2, _translate("MainWindow", "500", None))
+        self.SampleTime.setItemText(2, _translate("MainWindow", "500", None))'''
+
         self.label_Sensor.setText(_translate("MainWindow", "Sensores", None))
         self.check_Temp.setText(_translate("MainWindow", "Temperatura", None))
         self.check_Press.setText(_translate("MainWindow", "Presión", None))
         self.check_Thr.setText(_translate("MainWindow", "Empuje", None))
+
         self.label_SaveDataFormat.setText(_translate("MainWindow", "Formato de salida:", None))
-        self.OutFormat.setItemText(0, _translate("MainWindow", "Text (.txt)", None))
-        self.OutFormat.setItemText(1, _translate("MainWindow", "Excel (.csv)", None))
+        self.OutFormat.setItemText(0, _translate("MainWindow", "Excel (.csv)", None))
+        self.OutFormat.setItemText(1, _translate("MainWindow", "Text (.txt)", None))
+
         self.label_CountDown.setText(_translate("MainWindow", "Tiempo cuenta regresiva (s):", None))
         self.CountDown_Box.setItemText(0, _translate("MainWindow", "10", None))
         self.CountDown_Box.setItemText(1, _translate("MainWindow", "20", None))
         self.CountDown_Box.setItemText(2, _translate("MainWindow", "30", None))
-        self.Communication.setText(_translate("MainWindow", "Prueba de comunicación", None))
+
+        self.Communication.setText(_translate("MainWindow", "Inicio de comunicación", None))
+
         self.groupBox_2.setTitle(_translate("MainWindow", "Gráficas", None))
+
         self.groupBox_3.setTitle(_translate("MainWindow", "Visualización de estado", None))
         self.Feedback.setText(_translate("MainWindow", "Bienvenido al banco de pruebas", None))
+        
         self.groupBox_4.setTitle(_translate("MainWindow", "Control de ignición", None))
         self.Fire.setText(_translate("MainWindow", "Ignición", None))
         self.Stop.setText(_translate("MainWindow", "Stop", None))
+
         self.label_D1.setText(_translate("MainWindow", "Midiendo", None))
         self.label_D2.setText(_translate("MainWindow", "Cuenta regresiva", None))
 
