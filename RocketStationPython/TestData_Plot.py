@@ -10,7 +10,7 @@ class PlotData():
 
     def __init__(self, parent = None):
         # Se inicia puerto de comunicaciones
-        self.ser = serial.Serial('/dev/ttyUSB1', 115200, timeout=1)  # serial prueba
+        self.ser = serial.Serial('COM4', 115200, timeout=1)  # serial prueba
 
         # Se inicializan los vectores de datos (Tiempo y Variables)
         self.Time = np.array([0])
@@ -48,18 +48,23 @@ class PlotData():
 
 
                 if(len(Dato)>=20):
-                    Dato = Dato.decode('utf-8')
-                    Dato1 = re.split(',',Dato)
-                    Dato2 = Dato1[1:5]
-                    
-                    self.Time = np.append(self.Time, int(Dato2[0]))
+                    try:
+                        Dato = Dato.decode('utf-8')
+                        Dato1 = Dato.split(',')
+                        Dato2 = Dato1[1:5]
+                        
+                        self.Time = np.append(self.Time, int(Dato2[0]))
 
-                    self.Press = np.append(self.Press, (float(Dato2[1])/1000))
-                    self.Temp = np.append(self.Temp, (float(Dato2[2])/100))
-                    self.Thr = np.append(self.Thr, (float(Dato2[3])/1000))
+                        self.Press = np.append(self.Press, (float(Dato2[1])/1000))
+                        self.Temp = np.append(self.Temp, (float(Dato2[2])/100))
+                        self.Thr = np.append(self.Thr, (float(Dato2[3])/1000))
 
-                    print(len(self.Time))
+                        print(len(self.Time))
+                    except:
+                        mida=mida+1
                     mida=mida-1
+
+                    
 
 
     def CheckCommunication(self):

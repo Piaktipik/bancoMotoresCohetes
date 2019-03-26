@@ -7,37 +7,34 @@ char ThrustChar[6];
 //byte Receive[CHB_MAX_PAYLOAD];
 
 // Sensors values
+unsigned long Tiempo = 0;
 float Pressure = 0, Thrust = 0, Temperature = 0;
+
+float angle = 0;
 
 void setup() {
   // Begin serial communiation
-  Serial.begin(38400);
+  Serial.begin(115200);
   // put your setup code here, to run once:
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Pressure = random(1, 1000);
-  Temperature = random(15, 300);
-  Thrust = random(0, 200);
-  delay(500);
+  Tiempo = millis();
+  angle = (float(Tiempo)/1000)*PI;
+  Pressure = 100*sin(angle);
+  Temperature = 900*sin(angle);
+  Thrust = 500*tan(angle);
+  delay(20);
   SendData();
 }
 
 void SendData() {
   // Convert sensors value from float to char array and concatenate data into the format P0.000T000.00E000.00F
-  dtostrf(Pressure, 5, 3, PressureChar);
-  String str1(PressureChar);
- 
-  dtostrf(Temperature, 6, 2, TemperatureChar);
-  String str2(TemperatureChar);
 
-  dtostrf(Thrust, 6, 2, ThrustChar);
-  String str3(ThrustChar);
-
-  String Send = "P" + str1 + "T" + str2 + "E" + str3 + "F";
-
+  String Send = "M," + String(Tiempo) + "," + String(long(Pressure*1000)) + "," + String(long(Temperature*100)) + "," + String(long(Thrust*1000)) + ",F";
+  
   Serial.println(Send);
   //Send.toCharArray(Buf, Len);
 
