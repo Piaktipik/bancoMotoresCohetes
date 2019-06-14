@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1166</width>
-    <height>641</height>
+    <width>1258</width>
+    <height>700</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1258</width>
+    <height>690</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -17,14 +29,25 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>10</y>
-      <width>261</width>
-      <height>581</height>
+      <width>181</width>
+      <height>721</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="title">
      <string>Panel de Control</string>
@@ -32,26 +55,35 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>211</width>
-       <height>151</height>
+       <x>10</x>
+       <y>20</y>
+       <width>161</width>
+       <height>331</height>
       </rect>
      </property>
      <property name="title">
       <string>Estado</string>
      </property>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="LblEstado">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>181</width>
-        <height>61</height>
+        <y>20</y>
+        <width>141</width>
+        <height>191</height>
        </rect>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
       <property name="text">
-       <string>Bienvenido al banco de pruebas de motores cohete</string>
+       <string>Bienvenido al banco de pruebas de motores cohete. Pulse el boton &quot;Iniciar comunicación&quot; para establecer conexión entre los módulos.</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -60,12 +92,12 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="LblRecepcion">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>110</y>
-        <width>61</width>
+        <x>10</x>
+        <y>250</y>
+        <width>141</width>
         <height>31</height>
        </rect>
       </property>
@@ -79,7 +111,7 @@
        <enum>QFrame::Sunken</enum>
       </property>
       <property name="text">
-       <string>Activa</string>
+       <string>En espera</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -89,34 +121,34 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>109</y>
-        <width>131</width>
+        <y>220</y>
+        <width>151</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>Recepcion Datos:</string>
+       <string>Estado de conexión:</string>
       </property>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_4">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>230</y>
-       <width>191</width>
+       <x>10</x>
+       <y>360</y>
+       <width>161</width>
        <height>71</height>
       </rect>
      </property>
      <property name="title">
       <string>Formato de Salida</string>
      </property>
-     <widget class="QComboBox" name="comboBox">
+     <widget class="QComboBox" name="CBFormatoSalida">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>30</y>
-        <width>111</width>
+        <x>30</x>
+        <y>20</y>
+        <width>101</width>
         <height>31</height>
        </rect>
       </property>
@@ -135,57 +167,43 @@
     <widget class="QGroupBox" name="groupBox_5">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>310</y>
-       <width>171</width>
-       <height>251</height>
+       <x>10</x>
+       <y>440</y>
+       <width>160</width>
+       <height>231</height>
       </rect>
      </property>
      <property name="title">
       <string>Control Ignición</string>
      </property>
-     <widget class="QLCDNumber" name="lcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>130</y>
-        <width>151</width>
-        <height>111</height>
-       </rect>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="smallDecimalPoint">
-       <bool>false</bool>
-      </property>
-      <property name="digitCount">
-       <number>2</number>
-      </property>
-     </widget>
      <widget class="QGroupBox" name="groupBox_6">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>30</y>
-        <width>151</width>
-        <height>91</height>
+        <y>20</y>
+        <width>140</width>
+        <height>201</height>
        </rect>
       </property>
       <property name="title">
        <string>Tiempo para Ignición</string>
       </property>
-      <widget class="QSpinBox" name="spinBox">
+      <widget class="QSpinBox" name="SPTiempoIgnicion">
        <property name="geometry">
         <rect>
          <x>50</x>
-         <y>30</y>
+         <y>20</y>
          <width>51</width>
-         <height>27</height>
+         <height>21</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
        <property name="minimum">
         <number>5</number>
@@ -197,12 +215,12 @@
         <number>10</number>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="BtnIniciar">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>131</width>
+         <x>20</x>
+         <y>70</y>
+         <width>100</width>
          <height>31</height>
         </rect>
        </property>
@@ -216,13 +234,35 @@
         <string>Iniciar Conteo</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QLCDNumber" name="lcdConteo">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>151</width>
-         <height>91</height>
+         <x>35</x>
+         <y>120</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="smallDecimalPoint">
+        <bool>false</bool>
+       </property>
+       <property name="digitCount">
+        <number>2</number>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="BtnAbortar">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>50</y>
+         <width>135</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="font">
@@ -241,58 +281,469 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="BtnComunicacion">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>190</y>
-       <width>171</width>
-       <height>31</height>
+       <x>19</x>
+       <y>310</y>
+       <width>141</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>Iniciar Comunicación</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="BtnDetener">
+     <property name="geometry">
+      <rect>
+       <x>19</x>
+       <y>310</y>
+       <width>141</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Detener Comunicación</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>200</x>
       <y>10</y>
-      <width>861</width>
-      <height>591</height>
+      <width>1051</width>
+      <height>679</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="title">
      <string>Visualización de Datos</string>
     </property>
-    <widget class="QSplitter" name="splitter">
+    <widget class="QGraphicsView" name="graphicsView">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>821</width>
-       <height>513</height>
+       <x>110</x>
+       <y>20</y>
+       <width>930</width>
+       <height>210</height>
       </rect>
      </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>90</width>
+       <height>211</height>
+      </rect>
      </property>
-     <widget class="QQuickWidget" name="quickWidget">
-      <property name="resizeMode">
-       <enum>QQuickWidget::SizeRootObjectToView</enum>
+     <property name="title">
+      <string>Presión</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_10">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>71</width>
+        <height>40</height>
+       </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Actual</string>
+      </property>
+      <widget class="QLabel" name="P_Actual">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </widget>
-     <widget class="QQuickWidget" name="quickWidget_2">
-      <property name="resizeMode">
-       <enum>QQuickWidget::SizeRootObjectToView</enum>
+     <widget class="QGroupBox" name="groupBox_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Max</string>
+      </property>
+      <widget class="QLabel" name="P_Max">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </widget>
-     <widget class="QQuickWidget" name="quickWidget_3">
-      <property name="resizeMode">
-       <enum>QQuickWidget::SizeRootObjectToView</enum>
+     <widget class="QGroupBox" name="groupBox_12">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Min</string>
+      </property>
+      <widget class="QLabel" name="P_Min">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_13">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Mean</string>
+      </property>
+      <widget class="QLabel" name="P_Avg">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>240</y>
+       <width>90</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Temperatura</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_14">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Actual</string>
+      </property>
+      <widget class="QLabel" name="T_Actual">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_15">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Max</string>
+      </property>
+      <widget class="QLabel" name="T_Max">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_16">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Min</string>
+      </property>
+      <widget class="QLabel" name="T_Min">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_17">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Mean</string>
+      </property>
+      <widget class="QLabel" name="T_Avg">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>460</y>
+       <width>90</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Empuje</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_18">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Actual</string>
+      </property>
+      <widget class="QLabel" name="E_Actual">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_19">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Max</string>
+      </property>
+      <widget class="QLabel" name="E_Max">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_20">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Min</string>
+      </property>
+      <widget class="QLabel" name="E_Min">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_21">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Mean</string>
+      </property>
+      <widget class="QLabel" name="E_Avg">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>50</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -371,37 +822,12 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1166</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuBanco_Motores_Cohetes">
-    <property name="title">
-     <string>Banco Motores Cohetes</string>
-    </property>
-    <addaction name="actionVerDatos"/>
-   </widget>
-   <addaction name="menuBanco_Motores_Cohetes"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionVerDatos">
    <property name="text">
     <string>verDatos</string>
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QQuickWidget</class>
-   <extends>QWidget</extends>
-   <header>QtQuickWidgets/QQuickWidget</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
