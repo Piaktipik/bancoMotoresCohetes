@@ -1,0 +1,9 @@
+Código para leer temperatura, se toman 500 muestras por segundo aproximadamente, máximo se pueden 860 dependiendo del programa que se implemente en el banco.
+La termocupla presenta un rizado natural de 3-5°C, es muy sensible a la estática, hay que aterrizar el blindado que posee el cable de la termocupla.
+Los pines de conexión tienen etiqueta, el voltaje de alimentación debe estar entre 2 y 5 voltios.
+El conversor A/D esta protegido contra estática con una lamina de plástico metalizada (no la quitemos).
+
+El transductor puede convertir de 0 a 1300°C, pero al ser termocupla la mas minima señal de ruido afecta las temperaturas a nivel de ambiente, el sensor fue probado hasta los 680°C.
+Como le escribí una vez a julian, el tiempo de respuesta de la termocupla no es muy rapido por su naturaleza fisica, si este sensor no sirve por la taza de incremento de temperatura en la combustion de gases la unica opcion será utilizar infrarrojo.
+
+
